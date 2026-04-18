@@ -802,3 +802,60 @@ main {
   overflow: hidden; clip: rect(0,0,0,0);
   white-space: nowrap; border: 0;
 }
+
+
+/* Site footer (crisis + EASA contact, 3-column)
+   -------------------------------------------------------------------------- */
+.site-footer {
+  background: var(--teal-deep);
+  color: var(--white-warm);
+  padding: 2.75rem 0;
+  margin-top: auto;
+}
+
+.site-footer__grid {
+  display: grid;
+  gap: 1.75rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .site-footer__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+.site-footer__col {
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.site-footer__col p { margin: 0; }
+
+.site-footer__label {
+  display: block;
+  font-weight: 700;
+  color: var(--gold-soft);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.76rem;
+  margin-bottom: 0.65rem;
+}
+
+.site-footer a {
+  color: var(--white-warm);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+  font-weight: 500;
+}
+
+.site-footer a:hover { color: var(--gold-soft); }
+
+.site-footer__col strong {
+  color: var(--white-warm);
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 0.15rem;
+}
