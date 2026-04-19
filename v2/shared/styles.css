@@ -859,3 +859,26 @@ main {
   display: inline-block;
   margin-top: 0.15rem;
 }
+
+
+/* Tool-page back link (navigates to hub within iframe)
+   -------------------------------------------------------------------------- */
+.tool-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--teal-mid);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  padding: 0.45rem 0.95rem 0.45rem 0.75rem;
+  border-radius: var(--pill);
+  background: transparent;
+  transition: background var(--t-fast), color var(--t-fast);
+}
+.tool-back:hover,
+.tool-back:focus-visible {
+  background: var(--teal-paler);
+  color: var(--teal-deep);
+}
