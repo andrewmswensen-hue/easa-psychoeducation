@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Preview: EASA Psychoeducation embed</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" />
+  <style>
+    /* Quick mock of how a typical Squarespace page might frame the embed */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', system-ui, sans-serif;
+      background: #f5f1e8;
+      color: #1d2a33;
+      line-height: 1.6;
+    }
+    .mock-banner {
+      background: #ffe9a0;
+      color: #5a4200;
+      padding: 0.6rem 1rem;
+      text-align: center;
+      font-size: 0.82rem;
+      font-weight: 500;
+      border-bottom: 1px solid #e6d38a;
+    }
+    .mock-banner strong { color: #3a2a00; font-weight: 700; }
+    .mock-site-header {
+      background: white;
+      border-bottom: 1px solid rgba(21, 93, 110, 0.12);
+      padding: 1.25rem 1.5rem;
+    }
+    .mock-site-header__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .mock-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      color: #155d6e;
+      letter-spacing: 0.04em;
+    }
+    .mock-logo img { height: 44px; width: auto; }
+    .mock-nav {
+      display: flex;
+      gap: 1.75rem;
+      font-size: 0.92rem;
+      color: #4a5962;
+      font-weight: 500;
+    }
+    .mock-nav a { text-decoration: none; color: inherit; }
+    .mock-nav a.active { color: #155d6e; font-weight: 700; }
+    @media (max-width: 720px) { .mock-nav { display: none; } }
+
+    .mock-page {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 3rem;
+    }
+    .mock-page h1 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      color: #155d6e;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .mock-page__lede {
+      font-size: 1.1rem;
+      color: #4a5962;
+      margin-bottom: 2rem;
+      max-width: 680px;
+    }
+
+    /* The actual embed — this is what you'd paste on Squarespace */
+    .embed-wrap {
+      margin: 2rem 0;
+    }
+    .embed-wrap iframe {
+      width: 100%;
+      height: 1100px;
+      border: 0;
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(21, 93, 110, 0.12);
+    }
+
+    .mock-page__below {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      color: #4a5962;
+    }
+
+    .mock-site-footer {
+      background: #155d6e;
+      color: #fffdf7;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    .mock-controls {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    .mock-controls button {
+      border: 1px solid rgba(21, 93, 110, 0.2);
+      background: white;
+      color: #155d6e;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .mock-controls button.active {
+      background: #155d6e;
+      color: white;
+      border-color: #155d6e;
+    }
+    .mock-controls label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-left: auto;
+      font-size: 0.85rem;
+      color: #4a5962;
+    }
+    .mock-controls input[type="number"] {
+      width: 80px;
+      padding: 0.4rem 0.6rem;
+      border: 1px solid rgba(21, 93, 110, 0.2);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.88rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mock-banner">
+    <strong>Preview mock:</strong> This page approximates how the embed will look framed inside a Squarespace page. The iframe below is the actual tool.
+  </div>
+
+  <header class="mock-site-header">
+    <div class="mock-site-header__inner">
+      <div class="mock-logo">
+        <img src="https://images.squarespace-cdn.com/content/v1/5e45a2b8b705a43f627bca79/1582248694043-9J9GL9LD0YRBUR1SXSHC/FINALArtboard+2EASALOGO.png?format=500w" alt="Lane County EASA" />
+      </div>
+      <nav class="mock-nav">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#" class="active">Psychoeducation</a>
+        <a href="#">Resources</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mock-page">
+
+    <h1>Psychoeducation</h1>
+    <p class="mock-page__lede">
+      Explore three interactive guides about psychosis, attenuated psychosis,
+      and functional changes. Click through each module at your own pace.
+    </p>
+
+    <div class="mock-controls">
+      <button data-src="http://localhost:8000/embed/" class="active">Embed (local — what goes on Squarespace)</button>
+      <button data-src="https://andrewmswensen-hue.github.io/easa-psychoeducation/embed/">Embed (live GitHub Pages)</button>
+      <button data-src="http://localhost:8000/v2/">v2 standalone (with header/logo)</button>
+      <label>Height: <input id="heightInput" type="number" value="1100" step="50" min="600" /> px</label>
+    </div>
+
+    <div class="embed-wrap">
+      <iframe
+        id="demoFrame"
+        src="http://localhost:8000/embed/"
+        title="EASA Psychoeducation — Interactive Learning"
+        loading="lazy">
+      </iframe>
+    </div>
+
+    <div class="mock-page__below">
+      Above is a fully-working preview of exactly what would appear on a Squarespace
+      page if you pasted the iframe snippet. You can swap between the local preview
+      (what's running on your Mac right now) and the published GitHub Pages version.
+      Resize your browser window or use Chrome's device emulator (<strong>⌘ ⇧ M</strong>)
+      to test mobile responsiveness.
+    </div>
+
+  </main>
+
+  <footer class="mock-site-footer">
+    Mock EASA site footer · this is just a preview frame around the iframe
+  </footer>
+
+  <script>
+    const frame = document.getElementById('demoFrame');
+    const heightInput = document.getElementById('heightInput');
+
+    document.querySelectorAll('.mock-controls button').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.mock-controls button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        frame.src = btn.dataset.src;
+      });
+    });
+
+    heightInput.addEventListener('input', () => {
+      frame.style.height = `${heightInput.value}px`;
+    });
+  </script>
+
+</body>
+</html>
