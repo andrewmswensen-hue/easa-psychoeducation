@@ -65,7 +65,7 @@ body {
   font-size: 17px;
   line-height: 1.65;
   color: var(--text);
-  background: var(--cream);
+  background: #fffdf7; /* LIGHTEST 1 — matches EASA Squarespace section bg */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -610,10 +610,11 @@ main {
 .hub-card {
   display: flex;
   flex-direction: column;
-  background: var(--white-warm);
+  background: #ffffff; /* pure white pops gently against the LIGHTEST 1 body */
   padding: 1.75rem;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
+  border: 1px solid rgba(21, 93, 110, 0.08);
   transition: transform var(--t-fast), box-shadow var(--t-fast);
   text-decoration: none;
   color: inherit;

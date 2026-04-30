@@ -1,8 +1,45 @@
 /* EASA Psychoeducation — shared interaction components
-   Reveal cards, flip cards, chapter navigation. No dependencies. */
+   Reveal cards, flip cards, chapter navigation, parent-page bridge. */
 
 (function () {
   'use strict';
+
+  /* Parent bridge — when this page is iframed, send our content height to
+     the parent so it can size the iframe to fit (no nested scrollbars).
+     Also expose a request-scroll helper for the chapter nav.
+     -------------------------------------------------------------------- */
+  const isIframed = window.parent !== window;
+  let resizeScheduled = false;
+
+  function sendHeight() {
+    if (!isIframed) return;
+    if (resizeScheduled) return;
+    resizeScheduled = true;
+    requestAnimationFrame(() => {
+      resizeScheduled = false;
+      const h = Math.ceil(document.documentElement.scrollHeight);
+      window.parent.postMessage({ type: 'easa-embed-resize', height: h }, '*');
+    });
+  }
+
+  function requestParentScroll() {
+    if (!isIframed) return;
+    window.parent.postMessage({ type: 'easa-embed-scroll-to' }, '*');
+  }
+
+  function initParentBridge() {
+    if (!isIframed) return;
+
+    // Re-send height on any layout change
+    if (window.ResizeObserver) {
+      new ResizeObserver(sendHeight).observe(document.body);
+    }
+    window.addEventListener('load', sendHeight);
+    window.addEventListener('resize', sendHeight);
+
+    // Initial ping (covers cases before ResizeObserver triggers)
+    sendHeight();
+  }
 
   /* Reveal cards (tap to expand symptom examples)
      -------------------------------------------------------------------- */
@@ -15,6 +52,8 @@
       const toggle = () => {
         const open = card.getAttribute('aria-expanded') === 'true';
         card.setAttribute('aria-expanded', String(!open));
+        // Re-send height after CSS expansion settles
+        setTimeout(sendHeight, 320);
       };
 
       card.addEventListener('click', toggle);
@@ -51,9 +90,6 @@
   }
 
   /* Chapter navigation — linear prev/next + progress bar
-     Expects a wrapper with data-chapters containing .chapter elements,
-     and (optionally) controls: [data-nav-prev], [data-nav-next],
-     [data-progress-fill], [data-progress-label].
      -------------------------------------------------------------------- */
   function initChapterNav() {
     const wrap = document.querySelector('[data-chapters]');
@@ -70,7 +106,7 @@
 
     let i = 0;
 
-    function render() {
+    function render(isInitial) {
       chapters.forEach((ch, idx) => ch.classList.toggle('is-active', idx === i));
       if (fill)  fill.style.width = `${((i + 1) / chapters.length) * 100}%`;
       if (label) label.textContent = `Section ${i + 1} of ${chapters.length}`;
@@ -81,16 +117,24 @@
         nextBtn.disabled = last;
         nextBtn.textContent = last ? 'Done' : 'Next';
       }
-      // Scroll to top of tool content on chapter change
-      const anchor = document.querySelector('[data-chapter-top]');
-      if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      if (isInitial) return;
+
+      // Scroll behavior — let parent handle when iframed; locally scroll otherwise
+      if (isIframed) {
+        // Wait a beat for the new chapter content to lay out, then ask parent to scroll
+        setTimeout(requestParentScroll, 120);
+      } else {
+        const anchor = document.querySelector('[data-chapter-top]');
+        if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
 
     function go(delta) {
       const next = Math.max(0, Math.min(chapters.length - 1, i + delta));
       if (next === i) return;
       i = next;
-      render();
+      render(false);
     }
 
     if (prevBtn) prevBtn.addEventListener('click', () => go(-1));
@@ -103,12 +147,13 @@
       if (e.key === 'ArrowLeft')  go(-1);
     });
 
-    render();
+    render(true);
   }
 
   /* Init on DOM ready
      -------------------------------------------------------------------- */
   function init() {
+    initParentBridge();
     initRevealCards();
     initFlipCards();
     initChapterNav();
