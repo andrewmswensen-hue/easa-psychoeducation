@@ -111,10 +111,13 @@
       if (fill)  fill.style.width = `${((i + 1) / chapters.length) * 100}%`;
       if (label) label.textContent = `Section ${i + 1} of ${chapters.length}`;
       if (title) title.textContent = chapters[i].dataset.title || '';
-      if (prevBtn) prevBtn.disabled = i === 0;
+      if (prevBtn) {
+        prevBtn.disabled = false;
+        prevBtn.textContent = i === 0 ? '← All modules' : '← Back';
+      }
       if (nextBtn) {
         const last = i === chapters.length - 1;
-        nextBtn.disabled = last;
+        nextBtn.disabled = false;
         nextBtn.textContent = last ? 'Done' : 'Next';
       }
 
@@ -137,8 +140,18 @@
       render(false);
     }
 
-    if (prevBtn) prevBtn.addEventListener('click', () => go(-1));
-    if (nextBtn) nextBtn.addEventListener('click', () => go(1));
+    function goHome() {
+      window.location.href = '../';
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', () => {
+      if (i === 0) goHome();
+      else go(-1);
+    });
+    if (nextBtn) nextBtn.addEventListener('click', () => {
+      if (i === chapters.length - 1) goHome();
+      else go(1);
+    });
 
     // Keyboard shortcuts: ←/→ for prev/next (when not typing in a field)
     document.addEventListener('keydown', (e) => {
